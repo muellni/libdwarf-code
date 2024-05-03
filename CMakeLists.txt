@@ -191,20 +191,7 @@ if (ENABLE_DECOMPRESSION)
     set(ZLIB_FOUND TRUE)
   endif()
   # This feels excessive, however perhaps better safe than sorry
-  if(
-    NOT (
-      TARGET zstd::libzstd_shared OR
-      TARGET zstd::libzstd_static OR
-      TARGET libzstd_shared OR
-      TARGET libzstd_static OR
-      TARGET ZSTD::ZSTD
-    )
-  )
-    find_package(zstd)
-  else()
-    # Presumably in this case, the target has been found externally but set this flag just in case
-    set(zstd_FOUND TRUE)
-  endif()
+  find_package(zstd CONFIG REQUIRED)
   # Unfortunately aliasing ZSTD::ZSTD to zstd::libzstd_shared/static can lead to problems for end-users, a variable
   # is used
   if(TARGET zstd::libzstd_shared)
